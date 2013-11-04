@@ -1,3 +1,4 @@
+
 Blog2::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
@@ -24,6 +25,7 @@ Blog2::Application.configure do
   # config.assets.manifest = YOUR_PATH
 
   # Specifies the header that your server uses for sending files
+
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
 
@@ -64,4 +66,5 @@ Blog2::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
+
 end
