@@ -1,12 +1,20 @@
-<h1>Mis posts</h1>
 <table>
-  <tr> <th>Titulo</th>  <th>Texto</th>  </tr>
-  <% @posts.each do |post| %>
-    <tr>
-      <td><%= post.title %></td>
-      <td><%= post.text %></td>
-    </tr>
-  <% end %>
+  <tr>
+    <th>Title</th>
+    <th>Text</th>
+    <th></th>
+    <th></th>
+  </tr>
+ 
+<% @posts.each do |post| %>
+  <tr>
+    <td><%= post.title %></td>
+    <td><%= post.text %></td>
+    <td><%= link_to 'Mostrar detalles', post_path(post) %></td>
+    <td><%= link_to 'Editar', edit_post_path(post) %></td>
+    <td><%= link_to 'Eliminar', post, :method =>  :delete, :data => {:confirm => "are you sure bud?"}%></td>
+  </tr>
+<% end %>
 </table>
 
-<%= link_to 'Nuevo post', new_post_path %>
+<%= link_to 'Crear nuevo post', new_post_path %>
