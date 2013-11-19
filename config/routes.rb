@@ -2,8 +2,10 @@ Blog2::Application.routes.draw do
 
   get 'welcome/index'
 
-  resources :posts
+  resources :posts do
+  	resources :comments
+  end
 
-  root :to => 'post#index'  
+  root :to => 'posts#index'  
  
 end
