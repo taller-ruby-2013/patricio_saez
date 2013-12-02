@@ -12,6 +12,8 @@
 
 <%= render "comments/form" %>
 
-<h2>Comments</h2>
+<h2>Commentarios</h2>
 
-<%= render @post.comments %>
+<% if @post.comments.present? && @post.comments.respond_to?('each') %>
+	<%= render @post.comments %>
+<% end %>
