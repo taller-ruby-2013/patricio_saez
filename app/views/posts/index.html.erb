@@ -1,22 +1,58 @@
-<h1>El blog de <%= current_user.email%></h1>
+<style>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Text</th>
-    <th></th>
-    <th></th>
-  </tr>
- 
-<% @posts.each do |post| %>
-  <tr>
-    <td><%= post.title %></td>
-    <td><%= post.text %></td>
-    <td><%= link_to 'Mostrar detalles', post_path(post) %></td>
-    <td><%= link_to 'Editar', edit_post_path(post) %></td>
-    <td><%= link_to 'Eliminar', post, :method =>  :delete, :data => {:confirm => "are you sure bud?"}%></td>
-  </tr>
-<% end %>
-</table>
+  .posts-index-postTextSize {
 
-<%= link_to 'Crear nuevo post', new_post_path, :class => "btn btn-primary" %>
+    font-size: 14px!important;
+  }
+
+  .posts-index-postDate {
+
+    font-size: 10px!important;
+  }
+
+</style>
+
+<div class="row-fluid">
+  <div class="span8">
+    <h1>El blog de <%= current_user.email%></h1>  
+  </div>
+  <div class="span2 offset2">
+    <%= link_to 'Crear nuevo post', new_post_path, :class => "btn btn-warning btn-lg" %>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span8">
+      <% @all_posts = Post.where("user_id = :var_user_id", :var_user_id => current_user.id).order("created_at DESC") %>
+      <% if @all_posts.present? && @all_posts.respond_to?('each') %>
+      
+      <% @all_posts.each do |post| %>
+        <div class="well">
+        <% @all_comments = Comment.where("post_id = :var_post_id", :var_post_id => post.id).order("created_at ASC") %>
+
+        <h3><%= post.title%></h3>
+        <p class="posts-index-postDate">Publicado el <%= post.created_at %></p>
+        <p class="posts-index-postTextSize"><%= post.text%></p>
+        <% if @all_comments.present? && @all_comments.respond_to?('each') %>
+        <p class="posts-index-postTextSize"><b>Comentarios.</b></p>
+        <% @all_comments.each do |comment| %>
+        <% puts comment.user_id %>
+        <% @commenter = User.find(comment.user_id) %> 
+        <p class="posts-index-postTextSize"><i><%= @commenter.email%> escribió:</i></p>
+        <p class="posts-index-postTextSize"><%= comment.body%></p>
+        <% end %>
+        <% end %>
+        <%= link_to "Agregar comentario", new_comment_path, :class => "btn btn-success"%>
+        </div>
+      <% end %>
+
+      <% else %>
+
+      ¡Aún no has creado ningún post!
+      <% end %>
+    </div>
+    <div class="well span4">
+    </div>
+  </div>
+</div>

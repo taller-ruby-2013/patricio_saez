@@ -1,28 +1,36 @@
 <%#  @post = Post.new %>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span8 offset2 well">
+			<%= form_for @post do |f| %>
 
-<%= form_for @post do |f| %>
+				<% if @post.errors.any? %>
+				  <div id="errorExplanation">
+				    <h2><%= pluralize(@post.errors.count, "error") %> prohibited
+				      this post from being saved:</h2>
+				    <ul>
+				    <% @post.errors.full_messages.each do |msg| %>
+				      <li><%= msg %></li>
+				    <% end %>
+				    </ul>
+				  </div>
+				  <% end %>
 
-	<% if @post.errors.any? %>
-	  <div id="errorExplanation">
-	    <h2><%= pluralize(@post.errors.count, "error") %> prohibited
-	      this post from being saved:</h2>
-	    <ul>
-	    <% @post.errors.full_messages.each do |msg| %>
-	      <li><%= msg %></li>
-	    <% end %>
-	    </ul>
-	  </div>
-	  <% end %>
-
-	<p>
-		<%= f.label "Asunto" %>
-		<%= f.text_field :title%>
-	</p>
-	<p>
-		<%= f.label "Texto" %>
-		<%= f.text_area :text %>
-	</p>
-	<p>
-		<%= f.submit "Publicar post" %>
-	</p>
-<% end %>
+				<%= f.hidden_field :user_id, :value => current_user.id%>
+				<%= f.label "Título:" %><br />
+				<%= f.text_field :title, :class => "form-control" %><br />
+				<%= f.label "Texto:" %><br />
+				<%= f.text_area :text, :class => "form-control", :rows => 6 %><br /><br />
+				
+				<div class="row-fluid">
+					<div class="span2 offset8">
+						<%= f.submit "Publicar", :class => "btn btn-warning btn-lg btn-block" %>
+					</div>
+					<div class="span2">
+						<%= link_to 'Volver', posts_path, :class => "btn btn-default btn-lg btn-block" %>
+					</div>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>

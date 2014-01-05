@@ -1,6 +1,7 @@
 <h2>Agrega un comentario:</h2>
 <%= form_for([@post, @post.comments.build]) do |f| %>
   <p>
+    <%= f.hidden_field :user_id, :value => current_user.id %>
     <%= f.label :commenter %><br />
     <%= f.text_field :commenter %>
   </p>

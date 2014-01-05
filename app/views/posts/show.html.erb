@@ -9,11 +9,3 @@
 </p>
 
 <%= link_to 'Volver', posts_path %>
-
-<%= render "comments/form" %>
-
-<h2>Commentarios</h2>
-
-<% if @post.comments.present? && @post.comments.respond_to?('each') %>
-	<%= render @post.comments %>
-<% end %>
