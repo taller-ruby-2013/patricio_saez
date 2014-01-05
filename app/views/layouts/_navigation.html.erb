@@ -1,0 +1,36 @@
+<style>
+	
+	.layouts-navigation-background{
+
+		background-color: black!important;
+	}
+
+</style>
+
+<div class="navbar navbar-fixed-top">	
+	<div class="navbar-inner">		
+		<a class="brand" href="<%= main_app.root_path %>">
+			RoR Blog
+		</a>
+		<ul class="nav pull-right">
+			<% if current_user.nil? %>
+			<%# LINK A INICIO DE SESIÓN %>
+	        <li>
+	        	<a href="<%= new_user_session_path %>">Ingresa</a>
+	        </li>
+	        <%# LINK A REGISTRO DE NUEVO USUARIO %>
+	        <li>
+	        	<a href="<%= new_user_registration_path %>">Regístrate</a>
+	        </li>
+	        <% else %>	 	        								    	
+
+			<%# CIERRE DE SESIÓN %>
+			<li>			
+				<a href="<%= destroy_user_session_path %>" data-method="delete" rel="nofollow">
+					Cerrar sesión
+				</a>		
+			</li>
+			<% end %>
+	  	</ul>
+	</div>		
+</div>

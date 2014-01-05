@@ -2,10 +2,16 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
 
+#gem "therubyracer"
+#gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
+gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 group :development do
   gem 'sqlite3', '1.3.7'
+  gem 'rails_layout'
 end
 
 group :production do
